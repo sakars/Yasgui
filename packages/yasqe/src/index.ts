@@ -17,6 +17,8 @@ import { merge, escape } from "lodash-es";
 import getDefaults from "./defaults";
 import CodeMirror from "./CodeMirror";
 
+export * as Autocompleters from "./autocompleters";
+
 export interface Yasqe {
   on(eventName: "query", handler: (instance: Yasqe, req: superagent.SuperAgentRequest) => void): void;
   off(eventName: "query", handler: (instance: Yasqe, req: superagent.SuperAgentRequest) => void): void;
@@ -94,7 +96,7 @@ export class Yasqe extends CodeMirror {
         this.persistentConfig = { query: this.getValue(), editorHeight: this.config.editorHeight };
       if (this.persistentConfig && this.persistentConfig.query) this.setValue(this.persistentConfig.query);
     }
-    this.config.autocompleters.forEach((c) => this.enableCompleter(c).then(() => {}, console.warn));
+    this.config.autocompleters.forEach((c) => this.enableCompleter(c).then(() => { }, console.warn));
     if (this.config.consumeShareLink) {
       this.config.consumeShareLink(this);
       //and: add a hash listener!
@@ -327,7 +329,7 @@ export class Yasqe extends CodeMirror {
         if (this.req) {
           this.abortQuery();
         } else {
-          this.query().catch(() => {}); //catch this to avoid unhandled rejection
+          this.query().catch(() => { }); //catch this to avoid unhandled rejection
         }
       };
       this.queryBtn.title = "Run query";
