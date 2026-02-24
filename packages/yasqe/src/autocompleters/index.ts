@@ -259,10 +259,36 @@ export function preprocessIriForCompletion(yasqe: Yasqe, token: AutocompletionTo
   const queryPrefixes = yasqe.getPrefixesFromQuery();
   const stringToPreprocess = token.string;
 
-  if (stringToPreprocess.indexOf("<") < 0) {
-    token.tokenPrefix = stringToPreprocess.substring(0, stringToPreprocess.indexOf(":") + 1);
+  const getPreviousNonWsToken = (startCh: number) => {
+    const line = yasqe.getDoc().getCursor().line;
+    let ch = Math.max(startCh - 1, 0);
+    let prevToken: Token = yasqe.getTokenAt({ line, ch }) as Token;
+    while (prevToken && prevToken.type === "ws" && prevToken.start > 0) {
+      ch = Math.max(prevToken.start - 1, 0);
+      prevToken = yasqe.getTokenAt({ line, ch }) as Token;
+    }
+    return prevToken;
+  };
 
-    if (queryPrefixes[token.tokenPrefix.slice(0, -1)] != null) {
+  if (stringToPreprocess.indexOf("<") < 0) {
+    const prefixSeparatorIndex = stringToPreprocess.indexOf(":");
+    if (prefixSeparatorIndex >= 0) {
+      token.tokenPrefix = stringToPreprocess.substring(0, prefixSeparatorIndex + 1);
+    } else {
+      const prevToken = getPreviousNonWsToken(token.start);
+      if (prevToken && prevToken.string.endsWith(":")) {
+        token.tokenPrefix = prevToken.string;
+        token.from = { ch: prevToken.start };
+      } else if (prevToken && prevToken.string === ":") {
+        const prevPrevToken = getPreviousNonWsToken(prevToken.start);
+        if (prevPrevToken) {
+          token.tokenPrefix = prevPrevToken.string + ":";
+          token.from = { ch: prevPrevToken.start };
+        }
+      }
+    }
+
+    if (token.tokenPrefix && queryPrefixes[token.tokenPrefix.slice(0, -1)] != null) {
       token.tokenPrefixUri = queryPrefixes[token.tokenPrefix.slice(0, -1)];
     }
   }
@@ -277,6 +303,8 @@ export function preprocessIriForCompletion(yasqe: Yasqe, token: AutocompletionTo
         break;
       }
     }
+  } else if (stringToPreprocess.indexOf("<") < 0 && token.tokenPrefixUri) {
+    token.autocompletionString = token.tokenPrefixUri + stringToPreprocess;
   }
 
   if (token.autocompletionString.indexOf("<") == 0)

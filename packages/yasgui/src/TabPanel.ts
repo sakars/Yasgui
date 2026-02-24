@@ -79,17 +79,17 @@ export default class TabPanel {
     this.setAcceptHeader_graph(<string>reqConfig.acceptHeaderGraph);
     // console.log('setting args',reqConfig.args)
     if (typeof reqConfig.args !== "function") {
-      this.setArguments([...reqConfig.args] || []);
+      this.setArguments([...reqConfig.args]);
     }
 
     if (typeof reqConfig.headers !== "function") {
       this.setHeaders(toPairs(reqConfig.headers).map(([name, value]) => ({ name, value })));
     }
     if (typeof reqConfig.defaultGraphs !== "function") {
-      this.setDefaultGraphs([...reqConfig.defaultGraphs] || []);
+      this.setDefaultGraphs([...reqConfig.defaultGraphs]);
     }
     if (typeof reqConfig.namedGraphs !== "function") {
-      this.setNamedGraphs([...reqConfig.namedGraphs] || []);
+      this.setNamedGraphs([...reqConfig.namedGraphs]);
     }
   }
 

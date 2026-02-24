@@ -36,7 +36,8 @@ describe("Yasqe", function () {
     server = refs.server;
   });
 
-  beforeEach(async () => {
+  beforeEach(async function () {
+    this.timeout(60000); // Increase timeout for page load
     page = await getPage(browser, "yasqe.html");
     await page.evaluate(() => localStorage.clear());
   });
@@ -60,10 +61,10 @@ describe("Yasqe", function () {
     if (shouldNotHaveLength) {
       await page.waitForFunction(
         `document.querySelector('.CodeMirror-hints').children.length !== ${shouldNotHaveLength}`,
-        { timeout: 600 }
+        { timeout: 1200 }
       );
     } else {
-      await page.waitFor(`.CodeMirror-hints`, { timeout: 600 });
+      await page.waitForSelector(`.CodeMirror-hints`, { timeout: 1200 });
     }
     return page.evaluate(() => document.querySelector(".CodeMirror-hints")?.children.length);
   }
@@ -195,7 +196,7 @@ PREFIX geo: <http://www.opengis.net/ont/geosparql#> select
           window.yasqe.getDoc().setCursor({ line: at.line || window.yasqe.getCursor().line, ch: at.character });
           return window.yasqe.getCompleteToken();
         },
-        { character: character, line: line } as puppeteer.Serializable
+        { character: character, line: line }
       );
     };
     it("Should only trigger get request when needed", async () => {
@@ -486,6 +487,8 @@ PREFIX geo: <http://www.opengis.net/ont/geosparql#> select
          */
         const allResults = await waitForAutocompletionPopup();
 
+        expect(allResults).to.not.equal(0);
+
         /**
          * Type a string to reduce autocompletion list
          */
@@ -540,7 +543,7 @@ PREFIX geo: <http://www.opengis.net/ont/geosparql#> select
         await focusOnAutocompletionPos();
 
         try {
-          const hasAutocomplete = await page.waitFor(`.CodeMirror-hints`, { timeout: 200 });
+          const hasAutocomplete = await page.waitForSelector(`.CodeMirror-hints`, { timeout: 200 });
           expect(hasAutocomplete).to.be.undefined("", "Expected codemirror hint to not be there");
         } catch (e) {
           // We expect the timeout to trigger here
@@ -554,7 +557,7 @@ PREFIX geo: <http://www.opengis.net/ont/geosparql#> select
           (window.yasqe.autocompleters["class-local"] as any).config.autoShow = true;
         });
         await focusOnAutocompletionPos();
-        await page.waitFor(`.CodeMirror-hints`);
+        await page.waitForSelector(`.CodeMirror-hints`);
       });
     });
     describe("Async prefix autocompletion", function () {

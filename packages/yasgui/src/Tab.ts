@@ -311,14 +311,16 @@ export class Tab extends EventEmitter {
           acceptHeaderGraph: "text/turtle",
           //@ts-ignore
           acceptHeaderSelect: "application/sparql-results+json",
-          ...mergeWith({}, this.persistentJson.requestConfig, this.getStaticRequestConfig(), function customizer(
-            objValue,
-            srcValue
-          ) {
-            if (Array.isArray(objValue) || Array.isArray(srcValue)) {
-              return [...(objValue || []), ...(srcValue || [])];
+          ...mergeWith(
+            {},
+            this.persistentJson.requestConfig,
+            this.getStaticRequestConfig(),
+            function customizer(objValue, srcValue) {
+              if (Array.isArray(objValue) || Array.isArray(srcValue)) {
+                return [...(objValue || []), ...(srcValue || [])];
+              }
             }
-          }),
+          ),
           //Passing this manually. Dont want to use our own persistentJson, as that's flattened exclude functions
           //The adjustQueryBeforeRequest is meant to be a function though, so let's copy that as is
           adjustQueryBeforeRequest: this.yasgui.config.requestConfig.adjustQueryBeforeRequest,
@@ -476,7 +478,7 @@ export class Tab extends EventEmitter {
   public static getDefaults(yasgui?: Yasgui): PersistedJson {
     return {
       yasqe: {
-        value: yasgui ? yasgui.config.yasqe.value : Yasgui.defaults.yasqe.value,
+        value: (yasgui ? yasgui.config.yasqe.value : Yasgui.defaults.yasqe.value)?.toString() || "",
       },
       yasr: {
         response: undefined,

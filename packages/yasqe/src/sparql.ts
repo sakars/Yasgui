@@ -11,7 +11,10 @@ export interface PopulatedAjaxConfig {
   args: RequestArgs;
   withCredentials: boolean;
 }
-function getRequestConfigSettings(yasqe: Yasqe, conf?: Partial<Config["requestConfig"]>): RequestConfig<Yasqe> {
+function getRequestConfigSettings(
+  yasqe: Yasqe,
+  conf?: Partial<Config["requestConfig"]>
+): Partial<RequestConfig<Yasqe>> | undefined {
   return isFunction(conf) ? conf(yasqe) : conf;
 }
 // type callback = AjaxConfig.callbacks['complete'];
@@ -23,7 +26,7 @@ export function getAjaxConfig(
     {},
     getRequestConfigSettings(yasqe, yasqe.config.requestConfig),
     getRequestConfigSettings(yasqe, _config)
-  );
+  ) as RequestConfig<Yasqe>;
   if (!config.endpoint || config.endpoint.length == 0) return; // nothing to query!
 
   var queryMode = yasqe.getQueryMode();
@@ -97,7 +100,7 @@ export function getUrlArguments(yasqe: Yasqe, _config: Config["requestConfig"]):
   var queryMode = yasqe.getQueryMode();
 
   var data: RequestArgs = {};
-  const config: RequestConfig<Yasqe> = getRequestConfigSettings(yasqe, _config);
+  const config: RequestConfig<Yasqe> = getRequestConfigSettings(yasqe, _config) as RequestConfig<Yasqe>;
   var queryArg = isFunction(config.queryArgument) ? config.queryArgument(yasqe) : config.queryArgument;
   if (!queryArg) queryArg = yasqe.getQueryMode();
   data[queryArg] = config.adjustQueryBeforeRequest ? config.adjustQueryBeforeRequest(yasqe) : yasqe.getValue();
@@ -134,7 +137,7 @@ export function getUrlArguments(yasqe: Yasqe, _config: Config["requestConfig"]):
   return data;
 }
 export function getAcceptHeader(yasqe: Yasqe, _config: Config["requestConfig"]) {
-  const config: RequestConfig<Yasqe> = getRequestConfigSettings(yasqe, _config);
+  const config: RequestConfig<Yasqe> = getRequestConfigSettings(yasqe, _config) as RequestConfig<Yasqe>;
   var acceptHeader = null;
   if (yasqe.getQueryMode() == "update") {
     acceptHeader = isFunction(config.acceptHeaderUpdate) ? config.acceptHeaderUpdate(yasqe) : config.acceptHeaderUpdate;

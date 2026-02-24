@@ -1,3 +1,7 @@
 *.js
 *.d.ts
 *.js.map
+
+
+
+!distributeBuildFiles.js

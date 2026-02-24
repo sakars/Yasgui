@@ -82,7 +82,6 @@ export default class Response implements Plugin<PluginConfig> {
       readOnly: true,
       lineNumbers: true,
       lineWrapping: true,
-      foldGutter: true,
       gutters: ["CodeMirror-linenumbers", "CodeMirror-foldgutter"],
       value: value,
       extraKeys: { Tab: false },
