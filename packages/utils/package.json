@@ -1,16 +1,16 @@
 {
-  "name": "@triply/yasgui-utils",
+  "name": "@sakars/yasgui-utils",
   "version": "4.2.28",
   "description": "Utils for YASGUI libs",
   "main": "build/index.min.js",
   "types": "build/ts/src/index.d.ts",
   "license": "MIT",
-  "author": "Triply <info@triply.cc>",
-  "homepage": "https://github.com/TriplyDB/yasgui",
-  "bugs": "https://github.com/TriplyDB/yasgui/issues",
+  "author": "Sakars <sakars@users.noreply.github.com>",
+  "homepage": "https://github.com/sakars/yasgui",
+  "bugs": "https://github.com/sakars/yasgui/issues",
   "repository": {
     "type": "git",
-    "url": "https://github.com/TriplyDB/yasgui.git"
+    "url": "https://github.com/sakars/yasgui.git"
   },
   "dependencies": {
     "@types/node": "14.18.63",

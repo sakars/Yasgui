@@ -1,12 +1,12 @@
 {
-  "name": "@triply/yasgui",
+  "name": "@sakars/yasgui",
   "description": "Yet Another SPARQL GUI",
   "version": "4.2.28",
   "main": "build/yasgui.min.js",
   "types": "build/ts/src/index.d.ts",
   "license": "MIT",
-  "author": "Triply <info@triply.cc>",
-  "homepage": "https://github.com/TriplyDB/yasgui",
+  "author": "Sakars <sakars@users.noreply.github.com>",
+  "homepage": "https://github.com/sakars/yasgui",
   "engines": {
     "node": ">= 8"
   },
@@ -23,13 +23,13 @@
     "url": "https://github.com/TriplyDB/yasgui.git"
   },
   "scripts": {
-    "prepublishOnly": "./../../bin/checkPackageVersions.sh && cd ../.. && yarn run build"
+    "prepublishOnly": "node ./../../bin/checkPackageVersions.js && cd ../.. && yarn run build"
   },
   "dependencies": {
+    "@sakars/yasgui-utils": "^4.2.28",
+    "@sakars/yasqe": "^4.2.28",
+    "@sakars/yasr": "^4.2.28",
     "@tarekraafat/autocomplete.js": "^10.2.9",
-    "@triply/yasgui-utils": "^4.2.28",
-    "@triply/yasqe": "^4.2.28",
-    "@triply/yasr": "^4.2.28",
     "@types/lodash-es": "^4.17.12",
     "autosuggest-highlight": "^3.3.4",
     "blueimp-md5": "^2.19.0",

@@ -1,12 +1,12 @@
 {
-  "name": "@triply/yasqe",
+  "name": "@sakars/yasqe",
   "description": "Yet Another SPARQL Query Editor",
   "version": "4.2.28",
   "main": "build/yasqe.min.js",
   "types": "build/ts/src/index.d.ts",
   "license": "MIT",
-  "author": "Triply <info@triply.cc>",
-  "homepage": "https://github.com/TriplyDB/yasgui",
+  "author": "Sakars <sakars@users.noreply.github.com>",
+  "homepage": "https://github.com/sakars/yasgui",
   "engines": {
     "node": ">= 8"
   },
@@ -17,16 +17,16 @@
     "Semantic Web",
     "Linked Data"
   ],
-  "bugs": "https://github.com/TriplyDB/yasgui/issues/",
+  "bugs": "https://github.com/sakars/yasgui/issues/",
   "repository": {
     "type": "git",
-    "url": "https://github.com/TriplyDB/yasgui.git"
+    "url": "https://github.com/sakars/yasgui.git"
   },
   "scripts": {
-    "prepublishOnly": "./../../bin/checkPackageVersions.sh"
+    "prepublishOnly": "node ./../../bin/checkPackageVersions.js"
   },
   "dependencies": {
-    "@triply/yasgui-utils": "^4.2.28",
+    "@sakars/yasgui-utils": "^4.2.28",
     "@types/lodash-es": "^4.17.12",
     "codemirror": "^5.65.21",
     "lodash-es": "^4.17.23",
@@ -34,7 +34,7 @@
     "superagent": "5.3.1"
   },
   "peerDependencies": {
-    "@triply/yasgui": "4.x"
+    "@sakars/yasgui": "4.x"
   },
   "devDependencies": {
     "@types/codemirror": "5.60.17",

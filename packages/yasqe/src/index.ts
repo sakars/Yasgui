@@ -5,10 +5,10 @@ import { findFirstPrefixLine } from "./prefixFold";
 import { getPrefixesFromQuery, addPrefixes, removePrefixes, Prefixes } from "./prefixUtils";
 import { getPreviousNonWsToken, getNextNonWsToken, getCompleteToken } from "./tokenUtils";
 import * as sparql11Mode from "../grammar/tokenizer";
-import { Storage as YStorage } from "@triply/yasgui-utils";
+import { Storage as YStorage } from "@sakars/yasgui-utils";
 import * as queryString from "query-string";
 import tooltip from "./tooltip";
-import { drawSvgStringAsElement, addClass, removeClass } from "@triply/yasgui-utils";
+import { drawSvgStringAsElement, addClass, removeClass } from "@sakars/yasgui-utils";
 import * as Sparql from "./sparql";
 import * as imgs from "./imgs";
 import * as Autocompleter from "./autocompleters";
@@ -96,7 +96,7 @@ export class Yasqe extends CodeMirror {
         this.persistentConfig = { query: this.getValue(), editorHeight: this.config.editorHeight };
       if (this.persistentConfig && this.persistentConfig.query) this.setValue(this.persistentConfig.query);
     }
-    this.config.autocompleters.forEach((c) => this.enableCompleter(c).then(() => { }, console.warn));
+    this.config.autocompleters.forEach((c) => this.enableCompleter(c).then(() => {}, console.warn));
     if (this.config.consumeShareLink) {
       this.config.consumeShareLink(this);
       //and: add a hash listener!
@@ -329,7 +329,7 @@ export class Yasqe extends CodeMirror {
         if (this.req) {
           this.abortQuery();
         } else {
-          this.query().catch(() => { }); //catch this to avoid unhandled rejection
+          this.query().catch(() => {}); //catch this to avoid unhandled rejection
         }
       };
       this.queryBtn.title = "Run query";
@@ -640,21 +640,19 @@ export class Yasqe extends CodeMirror {
     var newQuery = "";
     var injected = false;
     var gotSelect = false;
-    (<any>Yasqe).runMode(this.getValue(), "sparql11", function (
-      stringVal: string,
-      className: string,
-      _row: number,
-      _col: number,
-      _state: TokenizerState
-    ) {
-      if (className === "keyword" && stringVal.toLowerCase() === "select") gotSelect = true;
-      newQuery += stringVal;
-      if (gotSelect && !injected && className === "punc" && stringVal === "{") {
-        injected = true;
-        //start injecting
-        newQuery += "\n" + injectString;
+    (<any>Yasqe).runMode(
+      this.getValue(),
+      "sparql11",
+      function (stringVal: string, className: string, _row: number, _col: number, _state: TokenizerState) {
+        if (className === "keyword" && stringVal.toLowerCase() === "select") gotSelect = true;
+        newQuery += stringVal;
+        if (gotSelect && !injected && className === "punc" && stringVal === "{") {
+          injected = true;
+          //start injecting
+          newQuery += "\n" + injectString;
+        }
       }
-    });
+    );
     return newQuery;
   }
 
@@ -928,6 +926,14 @@ export class Yasqe extends CodeMirror {
   }
 }
 (<any>Object).assign(CodeMirror.prototype, Yasqe.prototype);
+
+export class CYasqe<Context = null> extends Yasqe {
+  public context: Context | null;
+  constructor(rootEl: HTMLElement, config?: PartialConfig, context: Context | null = null) {
+    super(rootEl, config);
+    this.context = context;
+  }
+}
 
 export type TokenizerState = sparql11Mode.State;
 export type Position = CodeMirror.Position;

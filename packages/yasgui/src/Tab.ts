@@ -1,9 +1,15 @@
 import { EventEmitter } from "events";
-import { addClass, removeClass, getAsValue } from "@triply/yasgui-utils";
+import { addClass, removeClass, getAsValue } from "@sakars/yasgui-utils";
 import { TabListEl } from "./TabElements";
 import TabPanel from "./TabPanel";
-import { default as Yasqe, RequestConfig, PlainRequestConfig, PartialConfig as YasqeConfig } from "@triply/yasqe";
-import { default as Yasr, Parser, Config as YasrConfig, PersistentConfig as YasrPersistentConfig } from "@triply/yasr";
+import {
+  default as Yasqe,
+  RequestConfig,
+  PlainRequestConfig,
+  PartialConfig as YasqeConfig,
+  CYasqe,
+} from "@sakars/yasqe";
+import { default as Yasr, Parser, Config as YasrConfig, PersistentConfig as YasrPersistentConfig } from "@sakars/yasr";
 import { mapValues, eq, mergeWith, words, deburr, invert } from "lodash-es";
 import * as shareLink from "./linkUtils";
 import EndpointSelect from "./endpointSelect";
@@ -46,10 +52,10 @@ export interface Tab {
   on(event: "autocompletionClose", listener: (tab: Tab) => void): this;
   emit(event: "autocompletionClose", tab: Tab): boolean;
 }
-export class Tab extends EventEmitter {
+export class Tab<Context = null> extends EventEmitter {
   private persistentJson: PersistedJson;
   public yasgui: Yasgui;
-  private yasqe: Yasqe | undefined;
+  private yasqe: CYasqe<Context> | undefined;
   private yasr: Yasr | undefined;
   private rootEl: HTMLDivElement | undefined;
   private controlBarEl: HTMLDivElement | undefined;
