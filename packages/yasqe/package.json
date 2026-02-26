@@ -1,7 +1,7 @@
 {
   "name": "@sakars/yasqe",
   "description": "Yet Another SPARQL Query Editor",
-  "version": "4.2.28",
+  "version": "4.2.29-alpha.0",
   "main": "build/yasqe.min.js",
   "types": "build/ts/src/index.d.ts",
   "license": "MIT",
@@ -26,7 +26,7 @@
     "prepublishOnly": "node ./../../bin/checkPackageVersions.js"
   },
   "dependencies": {
-    "@sakars/yasgui-utils": "^4.2.28",
+    "@sakars/yasgui-utils": "^4.2.29-alpha.0",
     "@types/lodash-es": "^4.17.12",
     "codemirror": "^5.65.21",
     "lodash-es": "^4.17.23",

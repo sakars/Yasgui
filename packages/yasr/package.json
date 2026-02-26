@@ -1,7 +1,7 @@
 {
   "name": "@sakars/yasr",
   "description": "Yet Another SPARQL Resultset GUI",
-  "version": "4.2.28",
+  "version": "4.2.29-alpha.0",
   "main": "build/yasr.min.js",
   "types": "build/ts/src/index.d.ts",
   "license": "MIT",
@@ -27,8 +27,8 @@
   },
   "dependencies": {
     "@fortawesome/free-solid-svg-icons": "^5.15.4",
-    "@sakars/yasgui-utils": "^4.2.28",
-    "@sakars/yasqe": "^4.2.28",
+    "@sakars/yasgui-utils": "^4.2.29-alpha.0",
+    "@sakars/yasqe": "^4.2.29-alpha.0",
     "@types/lodash-es": "^4.17.12",
     "codemirror": "^5.65.21",
     "colors": "^1.4.0",
