@@ -2618,7 +2618,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@sakars/yasgui-utils@^4.2.28, @sakars/yasgui-utils@workspace:packages/utils":
+"@sakars/yasgui-utils@^4.2.29-alpha.0, @sakars/yasgui-utils@workspace:packages/utils":
   version: 0.0.0-use.local
   resolution: "@sakars/yasgui-utils@workspace:packages/utils"
   dependencies:
@@ -2631,9 +2631,9 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@sakars/yasgui@workspace:packages/yasgui"
   dependencies:
-    "@sakars/yasgui-utils": ^4.2.28
-    "@sakars/yasqe": ^4.2.28
-    "@sakars/yasr": ^4.2.28
+    "@sakars/yasgui-utils": ^4.2.29-alpha.0
+    "@sakars/yasqe": ^4.2.29-alpha.0
+    "@sakars/yasr": ^4.2.29-alpha.0
     "@tarekraafat/autocomplete.js": ^10.2.9
     "@types/autosuggest-highlight": ^3.2.3
     "@types/blueimp-md5": ^2.18.2
@@ -2652,11 +2652,11 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@sakars/yasqe@^4.2.28, @sakars/yasqe@workspace:packages/yasqe":
+"@sakars/yasqe@^4.2.29-alpha.0, @sakars/yasqe@workspace:packages/yasqe":
   version: 0.0.0-use.local
   resolution: "@sakars/yasqe@workspace:packages/yasqe"
   dependencies:
-    "@sakars/yasgui-utils": ^4.2.28
+    "@sakars/yasgui-utils": ^4.2.29-alpha.0
     "@types/codemirror": 5.60.17
     "@types/lodash-es": ^4.17.12
     "@types/node": 14.18.63
@@ -2671,13 +2671,13 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@sakars/yasr@^4.2.28, @sakars/yasr@workspace:packages/yasr":
+"@sakars/yasr@^4.2.29-alpha.0, @sakars/yasr@workspace:packages/yasr":
   version: 0.0.0-use.local
   resolution: "@sakars/yasr@workspace:packages/yasr"
   dependencies:
     "@fortawesome/free-solid-svg-icons": ^5.15.4
-    "@sakars/yasgui-utils": ^4.2.28
-    "@sakars/yasqe": ^4.2.28
+    "@sakars/yasgui-utils": ^4.2.29-alpha.0
+    "@sakars/yasqe": ^4.2.29-alpha.0
     "@types/codemirror": 5.60.17
     "@types/datatables.net": ^1.10.28
     "@types/dompurify": ^2.4.0
