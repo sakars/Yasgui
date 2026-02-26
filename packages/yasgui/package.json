@@ -1,7 +1,7 @@
 {
   "name": "@sakars/yasgui",
   "description": "Yet Another SPARQL GUI",
-  "version": "4.2.29-alpha.0",
+  "version": "4.3.0",
   "main": "build/yasgui.min.js",
   "types": "build/ts/src/index.d.ts",
   "license": "MIT",
