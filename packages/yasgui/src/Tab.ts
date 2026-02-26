@@ -52,10 +52,10 @@ export interface Tab {
   on(event: "autocompletionClose", listener: (tab: Tab) => void): this;
   emit(event: "autocompletionClose", tab: Tab): boolean;
 }
-export class Tab<Context = null> extends EventEmitter {
+export class Tab extends EventEmitter {
   private persistentJson: PersistedJson;
   public yasgui: Yasgui;
-  private yasqe: CYasqe<Context> | undefined;
+  private yasqe: CYasqe<Yasgui> | undefined;
   private yasr: Yasr | undefined;
   private rootEl: HTMLDivElement | undefined;
   private controlBarEl: HTMLDivElement | undefined;
@@ -355,7 +355,7 @@ export class Tab<Context = null> extends EventEmitter {
     if (!this.yasqeWrapperEl) {
       throw new Error("Expected a wrapper element before instantiating yasqe");
     }
-    this.yasqe = new Yasqe(this.yasqeWrapperEl, yasqeConf);
+    this.yasqe = new CYasqe(this.yasqeWrapperEl, yasqeConf, this.yasgui);
 
     this.yasqe.on("blur", this.handleYasqeBlur);
     this.yasqe.on("query", this.handleYasqeQuery);
